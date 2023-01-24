@@ -1,6 +1,7 @@
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
 import User from '../interfaces/user.interface';
+import { tokenCreation } from '../auth/jwt';
 
 class UserService {
   public model: UserModel;
@@ -9,9 +10,12 @@ class UserService {
     this.model = new UserModel(connection);
   }
 
-  public async postUser(user: User): Promise<User> {
-    const postedUser = await this.model.postUser(user);
-    return postedUser;
+  public async postUser(user: User): Promise<string> {
+    const { username } = user;
+    console.log(user);
+    const token = tokenCreation({ username });
+    await this.model.postUser(user);
+    return token;
   }
 
 //   public async getAllProducts(): Promise<Product[]> {

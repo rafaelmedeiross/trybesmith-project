@@ -6,8 +6,8 @@ class UserController {
 
   public postUser = async (req: Request, res: Response) => {
     const user = req.body;
-    const postedUser = await this.userService.postUser(user);
-    res.status(201).json(postedUser);
+    const feedback = await this.userService.postUser(user);
+    res.status(201).json({ token: feedback });
   };
 
 //   public getAllProducts = async (re:Request, res: Response) => {

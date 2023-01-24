@@ -8,7 +8,7 @@ export default class UserModel {
     this.connection = connection;
   }
 
-  public async postUser(user: User): Promise<User> {
+  public async postUser(user: User): Promise<number> {
     const { username, vocation, level, password } = user;
     const result = await this.connection.execute<ResultSetHeader>(
       'INSERT INTO Trybesmith.users (username, vocation, level, password) VALUES (?, ?, ?, ?)',
@@ -17,6 +17,6 @@ export default class UserModel {
     const [dataInserted] = result;
     const { insertId } = dataInserted;
     const id = insertId;
-    return { id, username, vocation, level, password };
+    return id;
   }
 }
