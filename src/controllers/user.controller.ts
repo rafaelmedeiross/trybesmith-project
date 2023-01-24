@@ -9,11 +9,6 @@ class UserController {
     const feedback = await this.userService.postUser(user);
     res.status(201).json({ token: feedback });
   };
-
-//   public getAllProducts = async (re:Request, res: Response) => {
-//     const allProducts = await this.userService.getAllProducts();
-//     res.status(200).json(allProducts);
-//   };
 }
 
 export default UserController;
