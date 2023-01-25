@@ -4,6 +4,7 @@ import UserController from './controllers/user.controller';
 import OrderController from './controllers/order.controller';
 import LoginController from './controllers/login.controller';
 import verifier from './middlewares/login.middleware';
+import { nameVerifier, amountVerifier } from './middlewares/product.middleware';
 
 const router = Router();
 
@@ -11,7 +12,7 @@ const productController = new ProductController();
 const userController = new UserController();
 const orderController = new OrderController();
 const loginController = new LoginController();
-router.post('/products', productController.postProduct);
+router.post('/products', nameVerifier, amountVerifier, productController.postProduct);
 router.get('/products', productController.getAllProducts);
 router.post('/users', userController.postUser);
 router.get('/orders', orderController.getAllOrders);
