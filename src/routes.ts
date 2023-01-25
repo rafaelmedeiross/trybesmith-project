@@ -6,10 +6,10 @@ import LoginController from './controllers/login.controller';
 import verifier from './middlewares/login.middleware';
 import { nameVerifier, amountVerifier } from './middlewares/user.middleware';
 import { 
-    usernameVerifier, 
-    vocationVerifier, 
-    levelVerifier, 
-    passwordVerifier } from './middlewares/product.middleware';
+  usernameVerifier, 
+  vocationVerifier, 
+  levelVerifier, 
+  passwordVerifier } from './middlewares/product.middleware';
 
 const router = Router();
 
