@@ -10,13 +10,15 @@ import {
   vocationVerifier, 
   levelVerifier, 
   passwordVerifier } from './middlewares/product.middleware';
+import productIdVerifier from './middlewares/order.middleware';
+import { tokenValidation } from './auth/jwt';
 
 const router = Router();
-
 const productController = new ProductController();
 const userController = new UserController();
 const orderController = new OrderController();
 const loginController = new LoginController();
+
 router.post('/products', nameVerifier, amountVerifier, productController.postProduct);
 router.get('/products', productController.getAllProducts);
 router.post(
@@ -28,5 +30,7 @@ router.post(
   userController.postUser,
 );
 router.get('/orders', orderController.getAllOrders);
+router.post('/orders', tokenValidation, productIdVerifier, orderController.postOrder);
 router.post('/login', verifier, loginController.loginUser);
+
 export default router;

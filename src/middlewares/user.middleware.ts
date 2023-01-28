@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 
 const nameVerifier = async (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
-  console.log(typeof name);
   const firstMessage = '"name" is required';
   const secondMessage = '"name" must be a string';
   const thirdMessage = '"name" length must be at least 3 characters long';

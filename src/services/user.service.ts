@@ -12,16 +12,10 @@ class UserService {
 
   public async postUser(user: User): Promise<string> {
     const { username } = user;
-    console.log(user);
     const token = tokenCreation({ username });
     await this.model.postUser(user);
     return token;
   }
-
-//   public async getAllProducts(): Promise<Product[]> {
-//     const allProducts = await this.model.getAllProducts();
-//     return allProducts;
-//   }
 }
 
 export default UserService;

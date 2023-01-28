@@ -11,7 +11,6 @@ export default class LoginModel {
 
   public async loginUser(login: Login): Promise<User> {
     const { username, password } = login;
-    console.log(login);
     const [[result]] = await this.connection.execute<RowDataPacket[] & User[]>(
       'SELECT *  FROM Trybesmith.users AS u WHERE u.username = ? AND u.password = ?;', 
       [username, password],

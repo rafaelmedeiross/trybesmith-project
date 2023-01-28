@@ -9,9 +9,7 @@ export default class ProductModel {
   }
 
   public async postProduct(product: Product): Promise<Product> {
-    console.log('modelproduct');
     const { name, amount } = product;
-    console.log(name, amount);
     const result = await this.connection.execute<ResultSetHeader>(
       'INSERT INTO Trybesmith.products (name, amount) VALUES (?, ?)',
       [name, amount],
@@ -19,7 +17,6 @@ export default class ProductModel {
     const [dataInserted] = result;
     const { insertId } = dataInserted;
     const id = insertId;
-    console.log(id, name, amount);
     return { id, name, amount };
   }
 

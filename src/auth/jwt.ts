@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
 
 const secret = 'mySecretSignature';
 const jwtConfig = {
@@ -9,11 +10,16 @@ const jwtConfig = {
 export const tokenCreation = (payload: object) => jwt
   .sign(payload, secret, <object> jwtConfig);
 
-export const tokenValidation = (token: string) => {
-  try {
-    const decoded = jwt.verify(token, secret);
-    return { decoded };
+export const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
+  try { 
+    const token = req.header('Authorization');
+    if (!token) {
+      return res.status(401).json({ message: 'Token not found' });
+    }
+    const loggedUser = jwt.verify(token, secret);
+    req.body.loggedUser = loggedUser;
+    next();
   } catch (error) {
-    return { message: 'Expired or invalid token' };
+    return res.status(401).json({ message: 'Invalid token' });
   }
 };
